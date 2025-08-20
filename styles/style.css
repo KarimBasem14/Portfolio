@@ -1,0 +1,204 @@
+/* ================= Root & Base ================= */
+:root {
+    --primary-color: #1E0044;
+    --rich-amethyst: #6A0DAD;
+    --soft-pink: #FFE4E1;
+    --creamy: #FFE4E1;
+    --black: #000000;
+    --border-radius: 0.5rem;
+    --page-horizontal-padding: 20px;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+    background-color: var(--primary-color);
+}
+
+a { text-decoration: none;
+color: inherit;
+}
+ul { list-style: none;
+}
+
+/* ================= Navigation ================= */
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 40px var(--page-horizontal-padding);
+    background-color: var(--primary-color);
+}
+nav a { width: 30%;
+}
+nav ul { display: flex;
+width: 50%;
+justify-content: space-evenly;
+}
+
+/* ================= Landing ================= */
+.landing { padding: 50px;
+text-align: center;
+}
+.landing h1 { font-size: 65px;
+}
+
+.gradient-underlined-text {
+    font-family: 'Georgia', serif;
+    font-size: 80px;
+    font-style: italic;
+    font-weight: 500;
+    background: linear-gradient(90deg, #b266ff, #ff4df0, #b266ff);
+    background-size: 300% 100%;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-slide 6s linear infinite;
+    position: relative;
+    display: inline-block;
+}
+.gradient-underlined-text::after {
+    content: "";
+    position: absolute;
+    left: 0;
+bottom: -10px;
+    width: 100%;
+height: 3px;
+    background: linear-gradient(90deg, #b266ff, #ff4df0, #b266ff);
+    background-size: 300% 100%;
+    animation: gradient-slide 6s linear infinite;
+    border-radius: 2px;
+}
+@keyframes gradient-slide { 0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%} }
+
+/* ================= Footer ================= */
+footer { background-color: var(--primary-color);
+}
+.social-media-icons { display: flex;
+}
+.social-media-icons img { width: 3%;
+}
+
+/* ================= About Me ================= */
+.about-me { padding: 60px 50px;
+}
+.about-me h1 { font-size:48px;
+margin-bottom:22px;
+line-height:1.1;
+}
+.about-me-content { display:flex;
+align-items:center;
+gap:60px;
+flex-wrap:wrap;
+}
+.about-me-text { flex:1 1 380px;
+font-size:18px;
+line-height:1.6;
+max-width:700px;
+}
+
+/* Animated morphing image with gradient ring that follows shape */
+.about-me-img {
+    position: relative;
+    width: 260px;
+height: 260px;
+    flex: 0 0 auto;
+    --angle: 0deg;
+/* custom property for spin */
+    border: 6px solid transparent;
+/* ring thickness */
+    border-radius: 50%;
+    background:
+        conic-gradient(from var(--angle), var(--rich-amethyst), #ff4df0, var(--soft-pink), var(--rich-amethyst)) border-box,
+        radial-gradient(var(--primary-color), var(--primary-color)) padding-box;
+    animation: spin-angle 8s linear infinite, blob 18s ease-in-out infinite, pulse 5s ease-in-out infinite;
+    will-change: border-radius, transform;
+}
+.about-me-img img { width:100%;
+     height:100%;
+object-fit:cover;
+border-radius:inherit;
+display:block;
+z-index: 2;}
+
+/* "That's me" arrow label */
+.me-label {
+    background-color: transparent;
+    position: absolute;
+    top: -50px;
+     right: -180px;
+/*offset outward */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: 'Georgia', serif;
+    background: none;
+    color: #ffe4e1;
+    animation: floaty 6s ease-in-out infinite;
+    pointer-events: none;
+    /* z-index: 2;
+*/
+}
+.me-label-text {
+    background: linear-gradient(90deg,#b266ff,#ff4df0,#ffe4e1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 1px;
+}
+.me-arrow { overflow: visible;
+}
+@keyframes floaty { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(6px);} }
+
+@media (max-width: 820px){
+    .me-label { right: -120px;
+transform: scale(.9);
+}
+}
+@media (max-width: 560px){
+    .me-label { position: static;
+margin-top: 14px;
+justify-content: center;
+animation:none;
+}
+    .about-me-img { margin-inline: auto;
+}
+    .me-arrow { display:none;
+}
+}
+
+/* Register custom property for smoother animation (Chrome/Edge/Firefox latest) */
+@property --angle { syntax:'<angle>';
+initial-value:0deg;
+inherits:false;
+}
+@keyframes spin-angle { to { --angle: 360deg;
+} }
+
+/* Organic morph */
+@keyframes blob {
+    0%{border-radius:50% 50% 50% 50% / 50% 50% 50% 50%}
+ 15%{border-radius:58% 42% 55% 45% / 54% 60% 40% 46%}
+ 30%{border-radius:45% 55% 48% 52% / 60% 45% 55% 40%}
+ 45%{border-radius:52% 48% 60% 40% / 42% 58% 45% 55%}
+ 60%{border-radius:62% 38% 46% 54% / 50% 40% 60% 50%}
+ 75%{border-radius:48% 52% 42% 58% / 58% 52% 48% 42%}
+ 90%{border-radius:55% 45% 57% 43% / 47% 63% 37% 53%}
+100%{border-radius:50% 50% 50% 50% / 50% 50% 50% 50%}
+}
+@keyframes pulse { 0%,100%{transform:scale(1)}50%{transform:scale(1.04)} }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .gradient-underlined-text, .gradient-underlined-text::after,
+    .about-me-img { animation: none;
+}
+}
+
+/* Responsive */
+@media (max-width: 820px){ .about-me-content{gap:40px;} .about-me-img{width:220px;height:220px;} .about-me h1{font-size:42px;} }
+@media (max-width: 560px){ .about-me{padding:50px 30px;} .about-me h1{font-size:38px;} .about-me-text{font-size:16px;} .about-me-img{margin-inline:auto;} .about-me-content{justify-content:center;} }
